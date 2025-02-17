@@ -86,3 +86,25 @@ The purpose of this RFID-based web application is to efficiently manage and trac
 - This is an academic project focusing on demonstrating RFID inventory management concepts
 - All transactions must be logged for audit purposes
 - System should maintain running totals of inventory levels based on transaction history
+
+## Database
+
+Database: elmer_motor_parts
+├── products table
+│   ├── rfid_tag_id (PK, VARCHAR(50))
+│   ├── part_name (VARCHAR(100))
+│   ├── brand (VARCHAR(100))
+│   ├── category (VARCHAR(50))
+│   ├── location_area (VARCHAR(50))
+│   ├── location_section (VARCHAR(50))
+│   ├── quantity (INT)
+│   ├── price (DECIMAL(10,2))
+│   └── description (TEXT)
+│
+└── transactions table
+    ├── transaction_id (PK, AUTO_INCREMENT)
+    ├── transaction_type (ENUM: 'SUPPLY', 'SALE_OUT')
+    ├── rfid_tag_id (FK -> products)
+    ├── quantity (INT)
+    ├── transaction_date (TIMESTAMP)
+    └── reference_number (VARCHAR(50))

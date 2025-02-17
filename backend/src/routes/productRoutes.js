@@ -1,26 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const studentController = require('../controllers/studentController');
+const productsController = require('../controllers/productsController');
 
-// Get all students
-router.get('/', studentController.getAllStudents);
+// Get all products
+router.get('/', productsController.getAllProducts);
 
-// Get student by RFID
-router.get('/rfid/:rfidTag', studentController.findByRFID);
+// Get product by RFID tag
+router.get('/rfid/:rfidTag', productsController.getProductByRFID);
 
-// Get student by ID
-router.get('/:id', studentController.getStudentById);
+// Get product by category
+router.get('/category/:category', productsController.getProductsByCategory);
 
-// Get student records
-router.get('/:id/records', studentController.getStudentRecords);
+// Get product by brand
+router.get('/brand/:brand', productsController.getProductsByBrand);
 
-// Create new student
-router.post('/', studentController.createStudent);
+// Get product by location
+router.get('/location/:locationId', productsController.getProductsByLocation);
 
-// Update student
-router.put('/:id', studentController.updateStudent);
+// Create new product
+router.post('/', productsController.createProduct);
 
-// Delete student
-router.delete('/:id', studentController.deleteStudent);
+// Update product
+router.put('/:rfidTag', productsController.updateProduct);
 
-module.exports = router; 
+// Delete product
+router.delete('/:rfidTag', productsController.deleteProduct);
+
+// Get product stock history
+router.get('/:rfidTag/history', productsController.getProductHistory);
+
+module.exports = router;

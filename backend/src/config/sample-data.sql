@@ -1,46 +1,168 @@
-INSERT INTO Passenger (RFID, FirstName, LastName, PhoneNumber, CurrentBalance) VALUES
-('RFID001', 'John', 'Doe', '09123456789', 500.00),
-('RFID002', 'Jane', 'Smith', '09234567890', 1000.00),
-('RFID003', 'Mary', 'Johnson', '09345678901', 1500.00),
-('RFID004', 'James', 'Brown', '09456789012', 200.00),
-('RFID005', 'Patricia', 'Davis', '09567890123', 800.00),
-('RFID006', 'Michael', 'Miller', '09678901234', 300.00),
-('RFID007', 'Linda', 'Wilson', '09789012345', 250.00),
-('RFID008', 'Robert', 'Moore', '09890123456', 100.00),
-('RFID009', 'Barbara', 'Taylor', '09123456780', 1200.00),
-('RFID010', 'William', 'Anderson', '09234567881', 700.00),
-('RFID011', 'Elizabeth', 'Thomas', '09345678902', 950.00),
-('RFID012', 'David', 'Jackson', '09456789013', 0.00),
-('RFID013', 'Jennifer', 'White', '09567890124', 450.00),
-('RFID014', 'Richard', 'Harris', '09678901235', 600.00),
-('RFID015', 'Susan', 'Martin', '09789012346', 120.00),
-('RFID016', 'Joseph', 'Thompson', '09890123457', 2000.00),
-('RFID017', 'Sarah', 'Garcia', '09123456782', 3000.00),
-('RFID018', 'Charles', 'Martinez', '09234567883', 50.00),
-('RFID019', 'Karen', 'Robinson', '09345678903', 75.00),
-('RFID020', 'Thomas', 'Clark', '09456789014', 500.00);
+USE elmer_motor_parts;
 
-INSERT INTO Transactions (RFID, TransactionType, Amount, Destination, Fare, RemainingBalance) VALUES
-('RFID001', 'Cash-in', 100.00, NULL, NULL, 600.00),
-('RFID001', 'Payment', 50.00, 'Guiuan Terminal', 50.00, 550.00),
-('RFID002', 'Cash-in', 200.00, NULL, NULL, 1200.00),
-('RFID002', 'Payment', 150.00, 'Borongan', 150.00, 1050.00),
-('RFID003', 'Payment', 500.00, 'Tacloban', 500.00, 1000.00),
-('RFID003', 'Cash-in', 300.00, NULL, NULL, 1300.00),
-('RFID004', 'Payment', 50.00, 'Guiuan Terminal', 50.00, 150.00),
-('RFID005', 'Cash-in', 200.00, NULL, NULL, 1000.00),
-('RFID005', 'Payment', 250.00, 'Basey', 250.00, 750.00),
-('RFID006', 'Cash-in', 100.00, NULL, NULL, 400.00),
-('RFID006', 'Payment', 150.00, 'Sulat', 150.00, 250.00),
-('RFID007', 'Payment', 50.00, 'Guiuan Terminal', 50.00, 200.00),
-('RFID007', 'Cash-in', 50.00, NULL, NULL, 250.00),
-('RFID008', 'Payment', 100.00, 'San Julian', 100.00, 0.00),
-('RFID009', 'Cash-in', 500.00, NULL, NULL, 1700.00),
-('RFID009', 'Payment', 300.00, 'Borongan', 300.00, 1400.00),
-('RFID010', 'Cash-in', 100.00, NULL, NULL, 800.00),
-('RFID010', 'Payment', 50.00, 'Guiuan Terminal', 50.00, 750.00),
-('RFID011', 'Payment', 500.00, 'Tacloban', 500.00, 450.00),
-('RFID012', 'Cash-in', 1000.00, NULL, NULL, 1000.00),
-('RFID013', 'Payment', 200.00, 'Borongan', 200.00, 250.00),
-('RFID014', 'Cash-in', 300.00, NULL, NULL, 900.00),
-('RFID015
+-- Delete existing data
+DELETE FROM transactions;
+DELETE FROM products;
+-- Sample Products
+INSERT INTO products (
+        rfid_tag_id,
+        part_name,
+        brand,
+        category,
+        location_area,
+        location_section,
+        quantity,
+        price,
+        description
+    )
+VALUES (
+        '12345678',
+        'Timing Belt',
+        'Toyota',
+        'Engine Parts',
+        'Storage Room 1',
+        'Shelf A1, Rack 03, Bin 2',
+        15,
+        2499.99,
+        'Genuine Toyota timing belt for Vios 2018-2022'
+    ),
+    (
+        '23456789',
+        'Brake Pad Set',
+        'Honda',
+        'Brake System',
+        'Storage Room 2',
+        'Shelf B3, Rack 12, Bin 4',
+        25,
+        1899.50,
+        'Front brake pad set for Honda Civic 2019-2023'
+    ),
+    (
+        '34567890',
+        'Oil Filter',
+        'Mitsubishi',
+        'Filters',
+        'Storage Room 1',
+        'Shelf A2, Rack 05, Bin 1',
+        50,
+        399.99,
+        'Genuine Mitsubishi oil filter for Montero Sport'
+    ),
+    (
+        '45678901',
+        'Spark Plug Set',
+        'NGK',
+        'Ignition',
+        'Storage Room 3',
+        'Shelf C1, Rack 02, Bin 3',
+        30,
+        799.99,
+        'Set of 4 iridium spark plugs'
+    ),
+    (
+        '56789012',
+        'Air Filter',
+        'Nissan',
+        'Filters',
+        'Storage Room 2',
+        'Shelf B1, Rack 08, Bin 5',
+        20,
+        649.50,
+        'Air filter for Nissan Navara 2020-2023'
+    ),
+    (
+        '67890123',
+        'Alternator',
+        'Denso',
+        'Electrical',
+        'Storage Room 1',
+        'Shelf A3, Rack 01, Bin 4',
+        8,
+        12999.99,
+        'Remanufactured alternator for Toyota Fortuner'
+    ),
+    (
+        '78901234',
+        'Radiator',
+        'Keihin',
+        'Cooling System',
+        'Storage Room 3',
+        'Shelf C2, Rack 06, Bin 1',
+        5,
+        8499.99,
+        'Aluminum radiator for Honda City 2018-2022'
+    ),
+    (
+        '89012345',
+        'Fuel Pump',
+        'Bosch',
+        'Fuel System',
+        'Storage Room 2',
+        'Shelf B2, Rack 09, Bin 2',
+        12,
+        4999.99,
+        'Electric fuel pump assembly'
+    ),
+    (
+        '90123456',
+        'Clutch Kit',
+        'Exedy',
+        'Transmission',
+        'Storage Room 1',
+        'Shelf A4, Rack 04, Bin 3',
+        6,
+        15999.99,
+        'Complete clutch kit for Mitsubishi L300'
+    ),
+    (
+        '01234567',
+        'Water Pump',
+        'Aisin',
+        'Cooling System',
+        'Storage Room 3',
+        'Shelf C3, Rack 07, Bin 4',
+        10,
+        3499.99,
+        'Water pump for Toyota Innova diesel'
+    );
+-- Sample Transactions
+INSERT INTO transactions (
+        transaction_type,
+        rfid_tag_id,
+        quantity,
+        reference_number
+    )
+VALUES -- Initial stock supplies
+    ('SUPPLY', '12345678', 20, 'PO-2024-001'),
+    ('SUPPLY', '23456789', 30, 'PO-2024-001'),
+    ('SUPPLY', '34567890', 60, 'PO-2024-001'),
+    ('SUPPLY', '45678901', 40, 'PO-2024-002'),
+    ('SUPPLY', '56789012', 25, 'PO-2024-002'),
+    ('SUPPLY', '67890123', 10, 'PO-2024-003'),
+    ('SUPPLY', '78901234', 8, 'PO-2024-003'),
+    ('SUPPLY', '89012345', 15, 'PO-2024-004'),
+    ('SUPPLY', '90123456', 10, 'PO-2024-004'),
+    ('SUPPLY', '01234567', 15, 'PO-2024-004'),
+    -- Sales transactions
+    ('SALE_OUT', '12345678', 5, 'SO-2024-001'),
+    ('SALE_OUT', '23456789', 5, 'SO-2024-002'),
+    ('SALE_OUT', '34567890', 10, 'SO-2024-003'),
+    ('SALE_OUT', '45678901', 10, 'SO-2024-004'),
+    ('SALE_OUT', '56789012', 5, 'SO-2024-005'),
+    ('SALE_OUT', '67890123', 2, 'SO-2024-006'),
+    ('SALE_OUT', '78901234', 3, 'SO-2024-007'),
+    ('SALE_OUT', '89012345', 3, 'SO-2024-008'),
+    ('SALE_OUT', '90123456', 4, 'SO-2024-009'),
+    ('SALE_OUT', '01234567', 5, 'SO-2024-010'),
+    -- Additional supplies
+    ('SUPPLY', '12345678', 10, 'PO-2024-005'),
+    ('SUPPLY', '34567890', 20, 'PO-2024-005'),
+    ('SUPPLY', '56789012', 10, 'PO-2024-006'),
+    ('SUPPLY', '78901234', 5, 'PO-2024-006'),
+    ('SUPPLY', '90123456', 5, 'PO-2024-007'),
+    -- Additional sales
+    ('SALE_OUT', '12345678', 10, 'SO-2024-011'),
+    ('SALE_OUT', '34567890', 20, 'SO-2024-012'),
+    ('SALE_OUT', '56789012', 10, 'SO-2024-013'),
+    ('SALE_OUT', '78901234', 5, 'SO-2024-014'),
+    ('SALE_OUT', '90123456', 5, 'SO-2024-015');

@@ -39,11 +39,7 @@
             <button id="newTransactionBtn" class="primary-btn">
               New Transaction
             </button>
-            <select
-              id="transactionType"
-              class="filter-select"
-              onchange="filterTransactions()"
-            >
+            <select id="transactionType" class="filter-select">
               <option value="all">All Transactions</option>
               <option value="SUPPLY">Supply</option>
               <option value="SALE_OUT">Sale Out</option>
@@ -67,6 +63,14 @@
                 <!-- Transactions will be dynamically loaded here -->
               </tbody>
             </table>
+            <!-- Add pagination controls -->
+            <div class="pagination">
+              <button id="prevPageTrans" class="pagination-btn" disabled>
+                Previous
+              </button>
+              <span id="pageInfoTrans" class="page-info">Page 1</span>
+              <button id="nextPageTrans" class="pagination-btn">Next</button>
+            </div>
           </div>
         </section>
       </main>
@@ -85,15 +89,25 @@
             </div>
             <div class="form-group">
               <label for="productRfid">RFID Tag ID</label>
-              <input type="text" id="productRfid" required />
+              <input autocomplete="off" type="text" id="productRfid" required />
             </div>
             <div class="form-group">
               <label for="transQuantity">Quantity</label>
-              <input type="number" id="transQuantity" required />
+              <input
+                autocomplete="off"
+                type="number"
+                id="transQuantity"
+                required
+              />
             </div>
             <div class="form-group">
               <label for="referenceNumber">Reference Number</label>
-              <input type="text" id="referenceNumber" required />
+              <input
+                autocomplete="off"
+                type="text"
+                id="referenceNumber"
+                required
+              />
             </div>
             <div class="form-actions">
               <button type="submit" class="primary-btn">
