@@ -52,7 +52,7 @@ This system helps appliance repair shops track repair jobs using RFID tags. It p
 
 1. Clone the repository:
 ```bash
-git clone [repository-url]
+git clone https://github.com/jersoncaibog/appliance-repair-records-management.git
 ```
 
 2. Install dependencies:
