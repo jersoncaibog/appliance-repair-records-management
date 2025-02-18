@@ -104,9 +104,9 @@ This project was developed as a freelance academic requirement for Angelo Capaga
 
 ## Credits
 
-Developed by [Your Name/Company]
+Developed by Jerson Caibog
 For: Angelo Capagalan
-Academic Institution: [Institution Name]
+Academic Institution: Eastern Samar State University Guiuan Campus
 Year: 2024
 
 ## License
