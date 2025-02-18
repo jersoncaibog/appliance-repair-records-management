@@ -405,7 +405,7 @@ class TableManager {
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button onclick="handleEditRepair(${repair.id})" class="button primary">Edit</button>
+                    <button onclick="handleEditRepairFromDetails(${repair.id}, this)" class="button primary">Edit</button>
                     <button onclick="this.closest('.modal').remove()" class="button secondary">Close</button>
                 </div>
             </div>
@@ -607,4 +607,28 @@ window.handleDeleteRepair = (id) => {
             }
         }
     );
+};
+
+window.handleEditRepairFromDetails = async (id, buttonElement) => {
+    // First close the repair details modal
+    buttonElement.closest('.modal').remove();
+    
+    // Then proceed with edit
+    try {
+        const response = await tableManager.apiService.getRepairById(id);
+        if (response.success) {
+            const form = document.getElementById('repairForm');
+            if (form) {
+                form.dataset.repairId = id;
+                Object.entries(response.data).forEach(([key, value]) => {
+                    const input = form.elements[key];
+                    if (input) input.value = value;
+                });
+                document.getElementById('modalTitle').textContent = 'Edit Repair';
+                tableManager.modalManager.openModal('repairModal');
+            }
+        }
+    } catch (error) {
+        tableManager.modalManager.showNotification(error.message, 'error');
+    }
 };
