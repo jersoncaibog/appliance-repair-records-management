@@ -1,256 +1,117 @@
-/* Base Styles */
-:root {
-    --primary-color: #335596;
-    --secondary-color: #475569;
-    --background-color: #ffffff;
-    --text-color: #1e293b;
-    --border-color: #e2e8f0;
-    --hover-color: #f8fafc;
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-}
-
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #0070f3;
+    --secondary-color: #666;
+    --background-color: #fff;
+    --border-color: #e5e7eb;
+    --text-color: #111;
+    --radius: 0.5rem;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
     line-height: 1.5;
+    color: var(--text-color);
+    background-color: #f5f5f5;
 }
 
-/* Layout */
-.app-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.header {
-    background-color: var(--background-color);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: var(--shadow-sm);
-    z-index: 1000;
-}
-
-.header-content {
-    max-width: 1200px;
-    width: 100%;
-    padding: 1rem 2rem;
+.container {
+    max-width: 1600px;
     margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header Styles */
+header {
+    margin-bottom: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1000;
 }
 
-.main-content {
-    flex: 1;
-    max-width: 1200px;
-    width: 100%;
-    margin: 2rem auto;
-    padding: 0 2rem;
-    z-index: 2000;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 0.25rem;
-}
-
-.header-left h1 {
-    margin-bottom: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-color);
-}
-
-/* Navigation */
-.navigation {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    margin-left: auto;
-    background-color: var(--hover-color);
-    padding: 0.375rem;
-    border-radius: 0.75rem;
-    box-shadow: var(--shadow-sm);
-}
-
-.nav-link {
-    color: var(--secondary-color);
-    text-decoration: none;
-    padding: 0.625rem 1.25rem;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease;
-    font-size: 0.875rem;
+h1 {
+    font-size: 1.2rem;
     font-weight: 600;
-    position: relative;
-    z-index: 1;
-    letter-spacing: 0.01em;
+    margin-bottom: 0;
 }
 
-.nav-link:hover {
-    color: var(--primary-color);
-    background-color: rgba(255, 255, 255, 0.8);
+.search-container {
+    display: flex;
+    gap: 1rem;
+    max-width: 50rem;
 }
 
-.nav-link.active {
-    background-color: rgb(227, 227, 227);
-    color: var(--primary-color);
-    box-shadow: var(--shadow-sm);
+/* Input and Select Styles */
+input, select, textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    width: 100%;
+    background-color: var(--background-color);
+    transition: all 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #1f2937;
+    box-shadow: 0 0 0 2px rgba(31, 41, 55, 0.1);
+}
+
+/* Button Styles */
+.button {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    text-wrap: nowrap;
+}
+
+.button.primary {
+    background-color: #1f2937;
+    color: white;
+}
+
+.button.primary:hover {
+    background-color: #374151;
     transform: translateY(-1px);
 }
 
-.nav-link.active:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+.button.secondary {
+    background-color: #f8fafc;
+    color: #1f2937;
+    border: 1px solid #e2e8f0;
 }
 
-/* Search */
-.search-container {
-    display: flex;
-    gap: 0.5rem;
-    margin-left: auto;
-    flex: 1;
-    max-width: 500px;
+.button.secondary:hover {
+    background-color: #f1f5f9;
+    color: #374151;
+    transform: translateY(-1px);
 }
 
-#rfidSearch {
-    width: 100%;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
+.button:active {
+    transform: translateY(0);
 }
 
-#searchBtn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    min-width: 80px;
-}
-
-#searchBtn:hover {
-    opacity: 0.9;
-}
-
-/* Buttons */
-.action-buttons {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.primary-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: opacity 0.2s;
-}
-
-.primary-btn:hover {
-    opacity: 0.9;
-}
-
-.secondary-btn {
-    background-color: white;
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.secondary-btn:hover {
-    background-color: var(--hover-color);
-}
-
-.danger-btn {
-    background-color: #d3d3d3;
-    color: rgb(0, 0, 0);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: opacity 0.2s;
-}
-
-.danger-btn:hover {
-    opacity: 0.9;
-}
-
-/* Table action buttons */
-td.action-buttons {
-    white-space: nowrap;
-    display: flex;
-    gap: 0.5rem;
-}
-
-td.action-buttons button {
-    font-size: 0.75rem;
-    flex: 1;
-}
-
-/* Responsive adjustments for table actions */
-@media screen and (max-width: 768px) {
-    td.action-buttons {
-        flex-direction: column;
-        gap: 0.25rem;
-    }
-    
-    td.action-buttons button {
-        width: 100%;
-    }
-}
-
-/* Filter Select */
-.filter-select {
-    max-width: 200px;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    background-color: white;
-    cursor: pointer;
-    transition: border-color 0.2s;
-}
-
-.filter-select:hover {
-    border-color: var(--primary-color);
-}
-
-.filter-select:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
-}
-
-/* Tables */
+/* Table Styles */
 .table-container {
-    background-color: white;
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
+    background-color: var(--background-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
     overflow: hidden;
-    margin-top: 2rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
 }
 
 table {
@@ -261,64 +122,49 @@ table {
 th, td {
     padding: 0.75rem 1rem;
     text-align: left;
-    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
 th {
-    background-color: var(--hover-color);
+    background-color: #fafafa;
     font-weight: 600;
-    color: var(--secondary-color);
-    border-bottom: 1px solid var(--border-color);
-    white-space: nowrap;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
 }
 
-td {
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-color);
+.table-footer {
+    padding: 1rem;
+    background-color: #fafafa;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-tr:last-child td {
-    border-bottom: none;
+.pagination {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
-tbody tr {
-    transition: background-color 0.2s;
-}
-
-tbody tr:hover {
-    background-color: var(--hover-color);
-}
-
-/* Add zebra striping for better readability */
-tbody tr:nth-child(even) {
-    background-color: rgba(248, 250, 252, 0.5);
-}
-
-tbody tr:nth-child(even):hover {
-    background-color: var(--hover-color);
-}
-
-/* Forms */
-.form-group {
-    margin-bottom: 1rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--secondary-color);
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.375rem;
+.pagination button {
+    padding: 0.5rem 1rem;
     font-size: 0.875rem;
 }
 
-/* Modal Base */
+#pageInfo {
+    min-width: 100px;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--secondary-color);
+}
+
+/* Modal Styles */
+#modalTitle {
+    margin-bottom: 1rem;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -327,341 +173,231 @@ input, select, textarea {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 3000;
     overflow-y: auto;
-    padding: 20px;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal.active {
-    display: flex;
+    padding: 1rem;
 }
 
 .modal-content {
-    background-color: #fff;
-    max-width: 500px;
-    width: 100%;
-    margin: auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--background-color);
+    margin: 2rem auto;
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    max-width: 600px;
     position: relative;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
 }
 
-.modal-content h2 {
-    margin-bottom: 20px;
-    color: #333;
+.close {
+    position: sticky;
+    float: right;
+    top: 0;
+    right: 0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: var(--background-color);
+    padding: 0.5rem;
+    margin: -0.5rem;
+    z-index: 1;
 }
 
+/* Form Styles */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
 }
 
-.form-group label {
+label {
     display: block;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
 .form-actions {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 
-/* Filters Section */
-.filters-section {
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 1.5rem;
+/* Utility Classes */
+.actions {
+    margin-bottom: 1rem;
 }
 
-.filter-controls {
-    display: flex;
-    justify-content: flex-end;
+/* Status Badges */
+.status-badge {
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    width: fit-content;
 }
 
-.filter-group {
-    max-width: 300px;
+.status-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-progress {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-completed {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+/* Layout Styles */
+.main-layout {
+    display: block;
+}
+
+.content-area {
     width: 100%;
 }
 
-.filter-group select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    background-color: white;
-    cursor: pointer;
-    transition: border-color 0.2s;
-}
-
-.filter-group select:hover {
-    border-color: var(--primary-color);
-}
-
-.filter-group select:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+/* Remove the media query for grid layout since we don't need it anymore */
+@media (max-width: 1024px) {
+    .rfid-input-container {
+        flex-direction: row;
+    }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        gap: 1rem;
+    .container {
+        padding: 1rem;
     }
 
-    .header-left {
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 1rem;
-    }
-
-    .navigation {
-        margin-left: 0;
-        width: auto;
-        padding: 0.25rem;
-    }
-
-    .nav-link {
-        padding: 0.5rem 1rem;
-        font-size: 0.8125rem;
-    }
-
-    .action-buttons {
+    header {
         flex-direction: column;
         align-items: stretch;
     }
 
+    h1 {
+        margin-bottom: 1.5rem;
+    }
+
     .search-container {
-        width: 100%;
-        max-width: 100%;
-        margin-left: 0;
-    }
-
-    #rfidSearch {
-        width: 100%;
-    }
-
-    .filter-controls {
         flex-direction: column;
-    }
-
-    .filter-select {
-        max-width: 100%;
     }
 
     .table-container {
         overflow-x: auto;
     }
 
-    .filter-group {
-        max-width: 100%;
-    }
-}
-
-/* Section Headers */
-.products-section h2,
-.transactions-section h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-}
-
-/* Delete Modal Specific */
-.delete-modal {
-    max-width: 400px;
-    margin: auto;
-}
-
-.delete-modal h2 {
-    color: #dc2626;
-    margin-bottom: 1rem;
-}
-
-.delete-modal p {
-    color: var(--secondary-color);
-    margin-bottom: 1.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-}
-
-.danger-btn {
-    background-color: #dc2626;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: opacity 0.2s;
-}
-
-.danger-btn:hover {
-    opacity: 0.9;
-    background-color: #b91c1c;
-}
-
-/* Responsive Modal Adjustments */
-@media screen and (max-height: 600px) {
     .modal {
-        align-items: flex-start;
+        padding: 0;
     }
     
     .modal-content {
-        margin: 20px auto;
+        margin: 0;
+        border-radius: 0;
+        min-height: 100vh;
     }
 }
 
-@media screen and (max-width: 768px) {
-    .modal-content {
-        max-width: 95%;
-        margin: 10px auto;
-    }
-    
-    .form-actions {
-        flex-direction: column;
-    }
-    
-    .form-actions button {
-        width: 100%;
-    }
-}
-
-/* Pagination */
-.pagination {
+.footer-buttons {
     display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 1rem;
+}
+
+/* Remove the old RFID section styles since we're using a modal now */
+.rfid-container {
+    text-align: center;
+}
+
+.rfid-input-container {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.rfid-input {
+    flex: 1;
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    font-family: monospace;
+}
+
+.rfid-status {
+    margin: 1.5rem 0;
     padding: 1rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.pagination-btn {
-    background-color: white;
+    border-radius: var(--radius);
+    background-color: #fafafa;
     border: 1px solid var(--border-color);
-    color: var(--primary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Icon Button Styles */
+.icon-button {
+    background: none;
+    border: none;
+    padding: 0.5rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    color: #1f2937;
+    border-radius: var(--radius);
+    line-height: 0;
 }
 
-.pagination-btn:hover:not(:disabled) {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
+.icon-button:hover {
+    background-color: #f3f4f6;
+    color: #374151;
 }
 
-.pagination-btn:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-    background-color: var(--hover-color);
-    color: var(--secondary-color);
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
 }
 
-.page-info {
-    color: var(--secondary-color);
-    font-size: 0.875rem;
+/* Ensure icons are properly sized and aligned */
+.icon-button svg {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+/* Repair Details Modal */
+.repair-details {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.detail-group {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.detail-group label {
     font-weight: 500;
+    color: var(--secondary-color);
+    margin: 0;
 }
 
-@media (max-width: 768px) {
-    .pagination {
-        gap: 0.5rem;
-        padding: 0.75rem;
-    }
-
-    .pagination-btn {
-        padding: 0.375rem 0.75rem;
-        font-size: 0.8125rem;
-    }
-}
-
-/* Action Button Hover Effects */
-.view-hover:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    background-color: rgba(51, 85, 150, 0.05);
-}
-
-.edit-hover:hover {
-    border-color: #eab308;
-    color: #854d0e;
-    background-color: rgba(234, 179, 8, 0.05);
-}
-
-.delete-hover:hover {
-    border-color: #dc2626;
-    color: #dc2626;
-    background-color: rgba(220, 38, 38, 0.05);
-}
-
-/* Toast Notifications */
-.toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 12px 24px;
-    border-radius: 6px;
+.detail-group span {
     font-size: 0.875rem;
-    font-weight: 500;
-    z-index: 9999;
-    opacity: 0;
-    transform: translateY(100%);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.toast.show {
-    opacity: 1;
-    transform: translateY(0);
+.status-update {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
-.toast-success {
-    background-color: #10b981;
-    color: white;
-    border-left: 4px solid #059669;
+.status-select {
+    min-width: 150px;
+    padding: 0rem 1rem;
 }
 
-.toast-error {
-    background-color: #ef4444;
-    color: white;
-    border-left: 4px solid #dc2626;
-}
-
-.toast-info {
-    background-color: #3b82f6;
-    color: white;
-    border-left: 4px solid #2563eb;
-}
-
-@media (max-width: 768px) {
-    .toast {
-        left: 20px;
-        right: 20px;
-        text-align: center;
-    }
+/* Make status select same height as button */
+.status-update select,
+.status-update button {
+    height: 38px;
 }

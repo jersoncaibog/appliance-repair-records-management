@@ -1,30 +1,22 @@
-USE elmer_motor_parts;
-
--- Drop tables if they exist
-DROP TABLE IF EXISTS transactions;
-DROP TABLE IF EXISTS products;
--- Create Products table
-CREATE TABLE products (
-    rfid_tag_id VARCHAR(50) PRIMARY KEY,
-    part_name VARCHAR(100) NOT NULL,
+-- Create the database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS repair_shop;
+USE repair_shop;
+-- Create the repair_history table
+CREATE TABLE IF NOT EXISTS repair_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(255) NOT NULL,
+    contact_number VARCHAR(20) NOT NULL,
+    appliance_type VARCHAR(100) NOT NULL,
     brand VARCHAR(100) NOT NULL,
-    category VARCHAR(50) NOT NULL,
-    location_area VARCHAR(50) NOT NULL,
-    location_section VARCHAR(50) NOT NULL,
-    quantity INT NOT NULL DEFAULT 0,
-    price DECIMAL(10, 2) NOT NULL,
-    description TEXT
+    model VARCHAR(100) NOT NULL,
+    issue_description TEXT NOT NULL,
+    repair_status ENUM('Pending', 'In Progress', 'Completed') NOT NULL DEFAULT 'Pending',
+    repair_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    rfid_tag VARCHAR(50) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
--- Create Transactions table
-CREATE TABLE transactions (
-    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
-    transaction_type ENUM('SUPPLY', 'SALE_OUT') NOT NULL,
-    rfid_tag_id VARCHAR(50) NOT NULL,
-    quantity INT NOT NULL,
-    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    reference_number VARCHAR(50),
-    FOREIGN KEY (rfid_tag_id) REFERENCES products(rfid_tag_id) ON DELETE RESTRICT,
-    INDEX idx_rfid (rfid_tag_id),
-    INDEX idx_transaction_type (transaction_type),
-    INDEX idx_transaction_date (transaction_date)
-);
+-- Create indexes
+CREATE INDEX idx_rfid_tag ON repair_history(rfid_tag);
+CREATE INDEX idx_customer_name ON repair_history(customer_name);
+CREATE INDEX idx_repair_status ON repair_history(repair_status);

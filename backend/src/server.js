@@ -1,21 +1,23 @@
-require('dotenv').config({ path: 'backend/.env' });
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
 
-// Database connection
-const db = require('./config/database');
+// Import database configuration
+const { pool, testConnection } = require('./config/db');
 
 // Import routes
-const productRoutes = require('./routes/productRoutes');
-const recordRoutes = require('./routes/recordRoutes');
+const repairRoutes = require('./routes/repairRoutes');
 
 // Initialize express
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:5500', 'http://127.0.0.1:5500'],
+    optionsSuccessStatus: 200
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev')); // HTTP request logger
@@ -29,17 +31,11 @@ app.get('/api/health', (req, res) => {
 });
 
 // API routes
-app.use('/api/products', productRoutes);
-app.use('/api/transactions', recordRoutes);
+app.use('/api/repairs', repairRoutes);
 
 // Serve index.html for the root route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../index.html'));
-});
-
-// Serve transactions.html for /transactions route
-app.get('/transactions', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../transactions.html'));
 });
 
 // Global error handling middleware
@@ -65,10 +61,9 @@ app.use((req, res) => {
 const PORT = process.env.PORT || 3000;
 
 // Test database connection before starting server
-db.getConnection()
-    .then(connection => {
+testConnection()
+    .then(() => {
         console.log('Database connected successfully');
-        connection.release();
         
         // Start server after successful database connection
         app.listen(PORT, () => {
