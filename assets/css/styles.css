@@ -11,7 +11,7 @@
     --background-color: #fff;
     --border-color: #e5e7eb;
     --text-color: #111;
-    --radius: 0.5rem;
+    --radius: 0.3rem;
     --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
 }
 
@@ -126,7 +126,7 @@ th, td {
 }
 
 th {
-    background-color: #fafafa;
+    background-color: #e7e7e7;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.75rem;
@@ -227,7 +227,7 @@ label {
 /* Status Badges */
 .status-badge {
     padding: 0.375rem 0.75rem;
-    border-radius: 9999px;
+    border-radius: 4px;
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.025em;
